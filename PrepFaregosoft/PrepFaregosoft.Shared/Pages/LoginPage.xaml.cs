@@ -1,4 +1,5 @@
 ﻿using PrepFaregosoft.Helpers;
+using PrepFaregosoft.Models;
 using System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -15,26 +16,40 @@ namespace PrepFaregosoft.Pages
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageDialog messageDialog;
             if (string.IsNullOrEmpty(EmailTextBox.Text))
             {
-                MessageDialog messageDialog = new MessageDialog("Debes ingresar un email.", "Error");
+                messageDialog = new MessageDialog("Debes ingresar un email.", "Error");
                 await messageDialog.ShowAsync();
                 return;
             }
 
             if (!RegexUtilities.IsValidEmail(EmailTextBox.Text))
             {
-                MessageDialog messageDialog = new MessageDialog("Debes ingresar un email válido.", "Error");
+                messageDialog = new MessageDialog("Debes ingresar un email válido.", "Error");
                 await messageDialog.ShowAsync();
                 return;
             }
 
             if (string.IsNullOrEmpty(PasswordPasswordBox.Password))
             {
-                MessageDialog messageDialog = new MessageDialog("Debes ingresar una contraseña.", "Error");
+                messageDialog = new MessageDialog("Debes ingresar una contraseña.", "Error");
                 await messageDialog.ShowAsync();
                 return;
             }
+
+            Response response = await ApiService.LoginAsync("https://localhost:44347/", "api", "Users", EmailTextBox.Text, PasswordPasswordBox.Password);
+            if (!response.IsSuccess)
+            {
+                messageDialog = new MessageDialog(response.Message, "Error");
+                await messageDialog.ShowAsync();
+                return;
+            }
+
+            User user = (User)response.Result;
+
+            messageDialog = new MessageDialog($"Bienvenido: {user.FirstName} {user.LastName}", "Ok");
+            await messageDialog.ShowAsync();
         }
     }
 }
