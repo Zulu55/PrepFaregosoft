@@ -50,6 +50,7 @@ namespace PrepFaregosoft.Pages
 
             messageDialog = new MessageDialog($"Bienvenido: {user.FirstName} {user.LastName}", "Ok");
             await messageDialog.ShowAsync();
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

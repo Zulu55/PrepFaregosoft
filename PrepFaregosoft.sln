@@ -13,19 +13,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.iOS", "PrepF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.UWP", "PrepFaregosoft\PrepFaregosoft.UWP\PrepFaregosoft.UWP.csproj", "{37A1D927-1FB5-4EC0-86A9-2A8D747EF999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Wasm", "PrepFaregosoft\PrepFaregosoft.Wasm\PrepFaregosoft.Wasm.csproj", "{560028F3-E854-4EBD-84A7-45A444721FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Wasm", "PrepFaregosoft\PrepFaregosoft.Wasm\PrepFaregosoft.Wasm.csproj", "{560028F3-E854-4EBD-84A7-45A444721FB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.macOS", "PrepFaregosoft\PrepFaregosoft.macOS\PrepFaregosoft.macOS.csproj", "{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Skia.Wpf.Host", "PrepFaregosoft\PrepFaregosoft.Skia.Wpf.Host\PrepFaregosoft.Skia.Wpf.Host.csproj", "{2303CC3D-511B-43B4-A350-F91D03DE5CCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Skia.Wpf.Host", "PrepFaregosoft\PrepFaregosoft.Skia.Wpf.Host\PrepFaregosoft.Skia.Wpf.Host.csproj", "{2303CC3D-511B-43B4-A350-F91D03DE5CCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Skia.Wpf", "PrepFaregosoft\PrepFaregosoft.Skia.Wpf\PrepFaregosoft.Skia.Wpf.csproj", "{C7C34273-0E12-4FF0-A66A-9784E081B86E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Skia.Wpf", "PrepFaregosoft\PrepFaregosoft.Skia.Wpf\PrepFaregosoft.Skia.Wpf.csproj", "{C7C34273-0E12-4FF0-A66A-9784E081B86E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Skia.Gtk", "PrepFaregosoft\PrepFaregosoft.Skia.Gtk\PrepFaregosoft.Skia.Gtk.csproj", "{6A664386-4B86-47D2-AE34-D5B99E69182E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Skia.Gtk", "PrepFaregosoft\PrepFaregosoft.Skia.Gtk\PrepFaregosoft.Skia.Gtk.csproj", "{6A664386-4B86-47D2-AE34-D5B99E69182E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Skia.Tizen", "PrepFaregosoft\PrepFaregosoft.Skia.Tizen\PrepFaregosoft.Skia.Tizen.csproj", "{D5A1A9AF-5319-4CC5-B5CE-E5C40000ACEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Skia.Tizen", "PrepFaregosoft\PrepFaregosoft.Skia.Tizen\PrepFaregosoft.Skia.Tizen.csproj", "{D5A1A9AF-5319-4CC5-B5CE-E5C40000ACEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepFaregosoft.Api", "PrepFaregosoft.Api\PrepFaregosoft.Api.csproj", "{7631C7A4-9726-417C-A4C9-93EABBC5A990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepFaregosoft.Api", "PrepFaregosoft.Api\PrepFaregosoft.Api.csproj", "{7631C7A4-9726-417C-A4C9-93EABBC5A990}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -173,6 +173,7 @@ Global
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.AppStore|x64.ActiveCfg = AppStore|iPhoneSimulator
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.AppStore|x86.ActiveCfg = AppStore|iPhoneSimulator
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{094E0E65-BB3D-47CD-8282-16129E2040BB}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.Debug|ARM64.ActiveCfg = Debug|iPhoneSimulator
 		{094E0E65-BB3D-47CD-8282-16129E2040BB}.Debug|iPhone.ActiveCfg = Debug|iPhone
@@ -349,6 +350,7 @@ Global
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.AppStore|x86.ActiveCfg = Debug|iPhoneSimulator
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.AppStore|x86.Build.0 = Debug|iPhoneSimulator
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.Debug|ARM64.ActiveCfg = Debug|iPhoneSimulator
 		{3BCC90DB-3976-4FAB-9784-9DBA6D2170A3}.Debug|iPhone.ActiveCfg = Debug|iPhoneSimulator
