@@ -21,10 +21,11 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Login" Margin="10,5" FontWeight="Bold"/>
-            <TextBox x:Name="EmailTextBox" PlaceholderText="Ingrese su email..." Width="200" Margin="10,5"/>
+            <TextBox x:Name="EmailTextBox" Text="juan@yopmail.com" PlaceholderText="Ingrese su email..." Width="200" Margin="10,5"/>
             <TextBlock Text="Contraseña" Margin="10,5" FontWeight="Bold"/>
-            <PasswordBox x:Name="PasswordPasswordBox" PlaceholderText="Ingrese su contraseña..." Width="200" Margin="10,5"/>
+            <PasswordBox x:Name="PasswordPasswordBox" Password="123456" PlaceholderText="Ingrese su contraseña..." Width="200" Margin="10,5"/>
             <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Stretch" Margin="10" Background="Navy" Foreground="White" FontWeight="Bold" Click="LoginButton_Click"/>
+            <Button x:Name="RegisterButton" Content="Registrar Nuevo Usuario" HorizontalAlignment="Stretch" Margin="10" Background="Orange" Foreground="White" FontWeight="Bold" Click="RegisterButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

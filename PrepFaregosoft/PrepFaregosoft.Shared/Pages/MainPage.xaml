@@ -16,7 +16,7 @@
         <StackPanel Grid.Row="0" Background="Navy">
             <TextBlock Text="Faregasoft" FontSize="20" FontWeight="Bold" Padding="10" Foreground="White"/>
         </StackPanel>
-        <NavigationView Grid.Row="1">
+        <NavigationView Grid.Row="1" IsPaneOpen="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="ProductsMenu" Content="Productos" Tapped="ProductsMenu_Tapped">
                     <NavigationViewItem.Icon>
