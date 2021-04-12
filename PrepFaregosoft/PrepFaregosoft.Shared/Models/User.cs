@@ -1,5 +1,8 @@
 ﻿namespace PrepFaregosoft.Models
 {
+    /// <summary>
+    /// User
+    /// </summary>
     public class User
     {
         public int Id { get; set; }
