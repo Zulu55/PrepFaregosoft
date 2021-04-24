@@ -21,14 +21,12 @@ namespace Faregosoft.Api.Controllers
             _context = context;
         }
 
-        // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             return await _context.Products.ToListAsync();
         }
 
-        // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -42,8 +40,6 @@ namespace Faregosoft.Api.Controllers
             return product;
         }
 
-        // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -70,21 +66,29 @@ namespace Faregosoft.Api.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(product);
         }
 
-        // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+            if (product.User == null)
+            {
+                return BadRequest("Es necesario especificar el usuario.");
+            }
+
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == product.User.Id);
+            if (user == null)
+            {
+                return BadRequest("Usuario no existe.");
+            }
+
+            product.User = user;
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
-        // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {

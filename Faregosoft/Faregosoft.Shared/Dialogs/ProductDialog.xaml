@@ -41,15 +41,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Margin="0,0,5,0" VerticalAlignment="Center" Grid.Column="0" Text="Nombre"/>
-            <TextBlock Grid.Row="1" Margin="0,0,5,0" VerticalAlignment="Center" Grid.Column="0" Text="Descripción"/>
-            <TextBlock Grid.Row="2" Margin="0,0,5,0" VerticalAlignment="Center" Grid.Column="0" Text="Precio"/>
-            <TextBlock Grid.Row="3" Margin="0,0,5,0" VerticalAlignment="Center" Grid.Column="0" Text="Inventario"/>
-            <TextBlock Grid.Row="4" Margin="0,0,5,0" VerticalAlignment="Center" Grid.Column="0" Text="Está activo?"/>
+            <TextBlock Grid.Row="0" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Nombre"/>
+            <TextBlock Grid.Row="1" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Descripción"/>
+            <TextBlock Grid.Row="2" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Precio"/>
+            <TextBlock Grid.Row="3" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Inventario"/>
+            <TextBlock Grid.Row="4" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Está activo?"/>
             <TextBox Grid.Row="0" Grid.Column="1" Height="32" Text="{Binding Product.Name, Mode=TwoWay}" PlaceholderText="Ingrese nombre del producto.."/>
             <TextBox Grid.Row="1" Grid.Column="1" Height="32" Text="{Binding Product.Description, Mode=TwoWay}" PlaceholderText="Ingrese descripción del producto.."/>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="32" Text="{Binding Product.Price, Mode=TwoWay}" PlaceholderText="Ingrese precio del producto.."/>
-            <TextBox Grid.Row="3" Grid.Column="1" Height="32" Text="{Binding Product.Inventory, Mode=TwoWay}" PlaceholderText="Ingrese inventario del producto.."/>
+            <TextBox Grid.Row="2" Grid.Column="1" Height="32" Text="{Binding Product.PriceString, Mode=TwoWay}" PlaceholderText="Ingrese precio del producto.."/>
+            <TextBox Grid.Row="3" Grid.Column="1" Height="32" Text="{Binding Product.InventoryString, Mode=TwoWay}" PlaceholderText="Ingrese inventario del producto.."/>
             <CheckBox Grid.Row="4" Grid.Column="1" Height="32" IsChecked="{Binding Product.IsActive, Mode=TwoWay}"/>
         </Grid>
 

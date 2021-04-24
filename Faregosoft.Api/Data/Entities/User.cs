@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Faregosoft.Api.Data.Entities
 {
@@ -29,8 +30,10 @@ namespace Faregosoft.Api.Data.Entities
 
         public bool IsBlock { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> Products { get; set; }
 
+        [JsonIgnore]
         public ICollection<Customer> Customers { get; set; }
     }
 }

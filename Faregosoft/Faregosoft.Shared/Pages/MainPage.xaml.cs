@@ -9,9 +9,12 @@ namespace Faregosoft.Pages
 {
     public sealed partial class MainPage : Page
     {
+        private static MainPage _instance;
+
         public MainPage()
         {
             InitializeComponent();
+            _instance = this;
         }
 
         public User User { get; set; }
@@ -22,6 +25,11 @@ namespace Faregosoft.Pages
             User = (User)e.Parameter;
             WelcomeTextBlock.Text = $"Bienvenido: {User.FirstName} {User.LastName}!";
             MyFrame.Navigate(typeof(CustomersPage));
+        }
+
+        public static MainPage GetInstance()
+        {
+            return _instance;
         }
 
         private void CustomersNavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)

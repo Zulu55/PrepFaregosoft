@@ -12,9 +12,13 @@ namespace Faregosoft.Models
 
         public decimal Price { get; set; }
 
+        public string PriceString { get; set; }
+
         public string PriceFormated => $"{Price:C2}";
 
         public float Inventory { get; set; }
+
+        public string InventoryString { get; set; }
 
         public string InventoryFormated => $"{Inventory:N2}";
 
