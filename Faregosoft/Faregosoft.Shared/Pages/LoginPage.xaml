@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="Faregosoft.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Faregosoft.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Email" Margin="5"/>
+            <TextBox x:Name="EmailTextBox" Text="juan@yopmail.com" PlaceholderText="Ingresa tu email..." Margin="5" Width="200"/>
+            <TextBlock Text="Contraseña" Margin="5"/>
+            <PasswordBox x:Name="PasswordPasswordBox" Password="123456" PlaceholderText="Ingresa tu contraseña..." Margin="5" Width="200"/>
+            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Stretch" Margin="5,10" Background="Navy" Foreground="White" FontWeight="Bold" Click="LoginButton_Click"/>
+            <Button x:Name="RegisterButton" Content="Registrar Nuevo Usuario" HorizontalAlignment="Stretch" Margin="5,10" Background="Silver" Foreground="Black" FontWeight="Bold" Click="RegisterButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6279c845-92f8-4333-ab99-3d213163593c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Faregosoft</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Loader.xaml.cs">
+      <DependentUpon>Loader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Dialogs\ProductDialog.xaml.cs">
+      <DependentUpon>ProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ApiService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\RegexUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Customer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RegisterUserModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\CustomersPage.xaml.cs">
+      <DependentUpon>CustomersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Components\Loader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Dialogs\ProductDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\CustomersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\delete.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\edit.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon-x.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ic_exit_to_app.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\product.png" />
+  </ItemGroup>
+</Project>
