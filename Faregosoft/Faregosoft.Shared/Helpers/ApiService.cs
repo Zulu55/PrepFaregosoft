@@ -150,7 +150,7 @@ namespace Faregosoft.Helpers
                 };
             }
         }
-        
+
         public static async Task<Response> PostAsync<T>(string urlBase, string servicePrefix, string controller, T model)
         {
             try
@@ -247,7 +247,6 @@ namespace Faregosoft.Helpers
             }
         }
 
-
         public static async Task<Response> DeleteAsync<T>(string urlBase, string servicePrefix, string controller, int id)
         {
             try
@@ -289,6 +288,5 @@ namespace Faregosoft.Helpers
                 };
             }
         }
-
     }
 }

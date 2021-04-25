@@ -19,17 +19,17 @@ namespace Faregosoft.Pages
 
         public User User { get; set; }
 
+        public static MainPage GetInstance()
+        {
+            return _instance;
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             User = (User)e.Parameter;
             WelcomeTextBlock.Text = $"Bienvenido: {User.FirstName} {User.LastName}!";
             MyFrame.Navigate(typeof(CustomersPage));
-        }
-
-        public static MainPage GetInstance()
-        {
-            return _instance;
         }
 
         private void CustomersNavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)

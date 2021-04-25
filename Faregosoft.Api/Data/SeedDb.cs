@@ -1,5 +1,6 @@
 ﻿using Faregosoft.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,10 +37,11 @@ namespace Faregosoft.Api.Data
             if (!_context.Products.Any())
             {
                 User user = await _context.Users.FirstOrDefaultAsync();
-                _context.Products.Add(new Product { User = user, Name = "iPad", Description = "Lorem Ipsum...", Price = 879.65M, Inventory = 12, IsActive = true }) ;
-                _context.Products.Add(new Product { User = user, Name = "iPhone", Description = "Lorem Ipsum...", Price = 1200.00M, Inventory = 36, IsActive = true });
-                _context.Products.Add(new Product { User = user, Name = "iWatch", Description = "Lorem Ipsum...", Price = 660.00M, Inventory = 24, IsActive = true });
-                _context.Products.Add(new Product { User = user, Name = "iMac", Description = "Lorem Ipsum...", Price = 2400.99M, Inventory = 6, IsActive = true });
+                Random random = new Random();
+                for (int i = 0; i < 100; i++)
+                {
+                    _context.Products.Add(new Product { User = user, Name = $"Producto: {i}", Description = $"Producto: {i}", Price = random.Next(1, 100), Inventory = random.Next(1, 100), IsActive = true });
+                }
                 await _context.SaveChangesAsync();
             }
         }

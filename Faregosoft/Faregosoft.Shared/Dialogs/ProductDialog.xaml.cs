@@ -10,29 +10,27 @@ namespace Faregosoft.Dialogs
 {
     public sealed partial class ProductDialog : ContentDialog
     {
-        private Product _product;
-
         public ProductDialog(Product product)
         {
             InitializeComponent();
-            DataContext = this;
-            _product = product;
-            _product.PriceString = $"{_product.Price}";
-            _product.InventoryString = $"{_product.Inventory}";
-            if (_product.IsEdit)
+            Product = product;
+            Product.PriceString = $"{Product.Price}";
+            Product.InventoryString = $"{Product.Inventory}";
+            if (Product.IsEdit)
             {
-                TitleTextBlock.Text = $"Editar Producto: {_product.Name}";
+                TitleTextBlock.Text = $"Editar Producto: {Product.Name}";
             }
             else
             {
-                TitleTextBlock.Text = "Nuevo prodcuto";
+                TitleTextBlock.Text = "Nuevo producto";
             }
         }
 
-        public Product Product
+        public Product Product { get; set; }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            get => _product;
-            set => _product = value;
+            Hide();
         }
 
         private async void AcceptButton_Click(object sender, RoutedEventArgs e)
@@ -43,7 +41,7 @@ namespace Faregosoft.Dialogs
                 return;
             }
 
-            _product.WasSaved = true;
+            Product.WasSaved = true;
             Hide();
         }
 
@@ -65,8 +63,7 @@ namespace Faregosoft.Dialogs
                 return false;
             }
 
-            decimal price;
-            decimal.TryParse(Product.PriceString, out price);
+            decimal.TryParse(Product.PriceString, out decimal price);
             Product.Price = price;
             if (Product.Price < 0)
             {
@@ -75,12 +72,11 @@ namespace Faregosoft.Dialogs
                 return false;
             }
 
-            float inventory;
-            float.TryParse(Product.InventoryString, out inventory);
+            float.TryParse(Product.InventoryString, out float inventory);
             Product.Inventory = inventory;
             if (Product.Inventory <= 0)
             {
-                messageDialog = new MessageDialog("Debes ingresar un inventario al prodcuto positivo.", "Error");
+                messageDialog = new MessageDialog("Debes ingresar un inventario al producto positivo.", "Error");
                 await messageDialog.ShowAsync();
                 return false;
             }
@@ -88,16 +84,10 @@ namespace Faregosoft.Dialogs
             return true;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            _product.WasSaved = false;
             Hide();
         }
 
-        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            _product.WasSaved = false;
-            Hide();
-        }
     }
 }

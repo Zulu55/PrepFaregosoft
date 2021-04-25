@@ -32,14 +32,10 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            LoginButton.IsEnabled = false;
-            RegisterButton.IsEnabled = false;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
             Response response = await ApiService.LoginAsync("https://localhost:44377/", "api", "Users", EmailTextBox.Text, PasswordPasswordBox.Password);
             loader.Close();
-            LoginButton.IsEnabled = true;
-            RegisterButton.IsEnabled = true;
 
             if (!response.IsSuccess)
             {

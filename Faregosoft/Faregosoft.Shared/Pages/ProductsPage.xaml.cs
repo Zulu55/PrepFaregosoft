@@ -23,7 +23,7 @@ namespace Faregosoft.Pages
 
         public ObservableCollection<Product> Products { get; set; }
 
-        private async void LoadProductsAsync()
+        private async Task LoadProductsAsync()
         {
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
@@ -32,8 +32,8 @@ namespace Faregosoft.Pages
 
             if (!response.IsSuccess)
             {
-                MessageDialog messageDialog = new MessageDialog(response.Message, "Error");
-                await messageDialog.ShowAsync();
+                MessageDialog dialog = new MessageDialog(response.Message, "Error");
+                await dialog.ShowAsync();
                 return;
             }
 
@@ -54,7 +54,6 @@ namespace Faregosoft.Pages
             Product product = new Product();
             ProductDialog dialog = new ProductDialog(product);
             await dialog.ShowAsync();
-            
             if (!product.WasSaved)
             {
                 return;
@@ -75,6 +74,8 @@ namespace Faregosoft.Pages
 
             Product newProduct = (Product)response.Result;
             Products.Add(newProduct);
+            Products = new ObservableCollection<Product>(Products.OrderBy(p => p.Name).ToList());
+            RefreshList();
         }
 
         private async void EditImage_Tapped(object sender, TappedRoutedEventArgs e)
@@ -83,7 +84,6 @@ namespace Faregosoft.Pages
             product.IsEdit = true;
             ProductDialog dialog = new ProductDialog(product);
             await dialog.ShowAsync();
-
 
             if (!product.WasSaved)
             {

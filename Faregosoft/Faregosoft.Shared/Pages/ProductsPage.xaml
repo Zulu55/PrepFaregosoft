@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Productos" FontSize="30" FontWeight="Bold"/>
+            <TextBlock Text="Productos" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
             <Button Content="Adicionar Producto" HorizontalAlignment="Right" Background="Navy" Foreground="White" CornerRadius="5" Margin="0,-35,0,0" Click="AddProductButton_Click"/>
             <Grid Margin="0,10,0,0">
                 <Grid.RowDefinitions>
@@ -60,15 +60,15 @@
                                 <ColumnDefinition Width="70"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Name}"/>
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Description}"/>
-                            <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind PriceFormated}"/>
-                            <TextBlock Grid.Column="3" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind InventoryFormated}"/>
-                            <CheckBox Grid.Column="4"  VerticalAlignment="Center" FontSize="14" IsEnabled="False" HorizontalAlignment="Right" IsChecked="{x:Bind IsActive}"/>
+                            <TextBlock  Grid.Column="0" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Name}"/>
+                            <TextBlock  Grid.Column="1" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Description}"/>
+                            <TextBlock  Grid.Column="2" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind PriceFormated}"/>
+                            <TextBlock  Grid.Column="3" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind InventoryFormated}"/>
+                            <CheckBox   Grid.Column="4" VerticalAlignment="Center" FontSize="14" IsEnabled="False"   HorizontalAlignment="Right"     IsChecked="{x:Bind IsActive}"/>
                             <StackPanel Grid.Column="5" Orientation="Horizontal">
-                                <Image Source="/Assets/edit.png" Margin="5,0" Height="25" VerticalAlignment="Center" Tapped="EditImage_Tapped"/>
+                                <Image Source="/Assets/edit.png"   Margin="5,0" Height="25" VerticalAlignment="Center" Tapped="EditImage_Tapped"/>
                                 <Image Source="/Assets/delete.png" Margin="5,0" Height="25" VerticalAlignment="Center" Tapped="DeleteImage_Tapped"/>
                             </StackPanel>
                         </Grid>

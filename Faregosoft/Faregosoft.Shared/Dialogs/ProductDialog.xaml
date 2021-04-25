@@ -26,7 +26,7 @@
             <TextBlock x:Name="TitleTextBlock" Text="Producto" TextWrapping="Wrap" FontSize="18" FontWeight="Bold" Foreground="#FAFAFA" Margin="5,0" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="#55565A">
-            <Image Source="/Assets/icon-x.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Tapped="Image_Tapped"/>
+            <Image Source="/Assets/icon-x.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Tapped="CloseImage_Tapped"/>
         </StackPanel>
 
         <Grid Grid.Row="1" Grid.Column="1" Margin="0,5">
@@ -46,11 +46,11 @@
             <TextBlock Grid.Row="2" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Precio"/>
             <TextBlock Grid.Row="3" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Inventario"/>
             <TextBlock Grid.Row="4" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Text="Está activo?"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Height="32" Text="{Binding Product.Name, Mode=TwoWay}" PlaceholderText="Ingrese nombre del producto.."/>
-            <TextBox Grid.Row="1" Grid.Column="1" Height="32" Text="{Binding Product.Description, Mode=TwoWay}" PlaceholderText="Ingrese descripción del producto.."/>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="32" Text="{Binding Product.PriceString, Mode=TwoWay}" PlaceholderText="Ingrese precio del producto.."/>
-            <TextBox Grid.Row="3" Grid.Column="1" Height="32" Text="{Binding Product.InventoryString, Mode=TwoWay}" PlaceholderText="Ingrese inventario del producto.."/>
-            <CheckBox Grid.Row="4" Grid.Column="1" Height="32" IsChecked="{Binding Product.IsActive, Mode=TwoWay}"/>
+            <TextBox  Grid.Row="0" Grid.Column="1" CornerRadius="5" Height="32" Text="{x:Bind Product.Name,            Mode=TwoWay}" PlaceholderText="Ingrese nombre del producto.."/>
+            <TextBox  Grid.Row="1" Grid.Column="1" CornerRadius="5" Height="32" Text="{x:Bind Product.Description,     Mode=TwoWay}" PlaceholderText="Ingrese descripción del producto.."/>
+            <TextBox  Grid.Row="2" Grid.Column="1" CornerRadius="5" Height="32" Text="{x:Bind Product.PriceString,     Mode=TwoWay}" PlaceholderText="Ingrese precio del producto.."/>
+            <TextBox  Grid.Row="3" Grid.Column="1" CornerRadius="5" Height="32" Text="{x:Bind Product.InventoryString, Mode=TwoWay}" PlaceholderText="Ingrese inventario del producto.."/>
+            <CheckBox Grid.Row="4" Grid.Column="1" CornerRadius="5" Height="32" IsChecked="{x:Bind Product.IsActive,   Mode=TwoWay}"/>
         </Grid>
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
