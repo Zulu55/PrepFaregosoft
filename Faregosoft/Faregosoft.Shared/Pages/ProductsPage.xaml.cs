@@ -27,7 +27,7 @@ namespace Faregosoft.Pages
         {
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.GetListAsync<Product>("https://faregosoftapi.azurewebsites.net/", "api", "Products");
+            Response response = await ApiService.GetListAsync<Product>(Settings.GetApiUrl(), "api", "Products");
             loader.Close();
 
             if (!response.IsSuccess)
@@ -62,7 +62,7 @@ namespace Faregosoft.Pages
             product.User = MainPage.GetInstance().User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PostAsync("https://faregosoftapi.azurewebsites.net/", "api", "Products", product);
+            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "Products", product);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -93,7 +93,7 @@ namespace Faregosoft.Pages
             product.User = MainPage.GetInstance().User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PutAsync("https://faregosoftapi.azurewebsites.net/", "api", "Products", product, product.Id);
+            Response response = await ApiService.PutAsync(Settings.GetApiUrl(), "api", "Products", product, product.Id);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -120,7 +120,7 @@ namespace Faregosoft.Pages
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
             Product product = Products[ProductsListView.SelectedIndex];
-            Response response = await ApiService.DeleteAsync<Product>("https://faregosoftapi.azurewebsites.net/", "api", "Products", product.Id);
+            Response response = await ApiService.DeleteAsync<Product>(Settings.GetApiUrl(), "api", "Products", product.Id);
             loader.Close();
 
             if (!response.IsSuccess)

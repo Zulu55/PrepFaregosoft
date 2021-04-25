@@ -48,7 +48,7 @@ namespace Faregosoft.Pages
             };
 
             MessageDialog messageDialog;
-            Response response = await ApiService.RegisterAsync("https://faregosoftapi.azurewebsites.net/", "api", "Users", model);
+            Response response = await ApiService.RegisterAsync(Settings.GetApiUrl(), "api", "Users", model);
             if (!response.IsSuccess)
             {
                 messageDialog = new MessageDialog(response.Message, "Error");
