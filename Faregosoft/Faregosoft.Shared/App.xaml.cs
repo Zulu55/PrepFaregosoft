@@ -32,7 +32,7 @@ namespace Faregosoft
             var window = new Window();
             window.Activate();
 #else
-            Window window = Windows.UI.Xaml.Window.Current;
+            Window window = Window.Current;
 #endif
 
             Frame rootFrame = window.Content as Frame;

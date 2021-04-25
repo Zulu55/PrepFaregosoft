@@ -19,14 +19,12 @@ namespace Faregosoft.Api2.Controllers
             _context = context;
         }
 
-        // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
@@ -40,8 +38,6 @@ namespace Faregosoft.Api2.Controllers
             return customer;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
@@ -68,21 +64,30 @@ namespace Faregosoft.Api2.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(customer);
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
+            if (customer.User == null)
+            {
+                return BadRequest("Es necesario especificar el usuario.");
+            }
+
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == customer.User.Id);
+            if (user == null)
+            {
+                return BadRequest("Usuario no existe.");
+            }
+
+            customer.User = user;
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 
-        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {

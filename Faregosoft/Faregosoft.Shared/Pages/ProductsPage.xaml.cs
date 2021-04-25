@@ -147,6 +147,5 @@ namespace Faregosoft.Pages
 
             return await confirmDialog.ShowAsync();
         }
-
     }
 }

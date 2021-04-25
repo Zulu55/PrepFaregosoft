@@ -88,6 +88,5 @@ namespace Faregosoft.Dialogs
         {
             Hide();
         }
-
     }
 }
