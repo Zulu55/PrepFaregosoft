@@ -1,15 +1,19 @@
 ﻿using Faregosoft.Api2.Data;
 using Faregosoft.Api2.Data.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Faregosoft.Api2.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         private readonly DataContext _context;
@@ -70,12 +74,8 @@ namespace Faregosoft.Api2.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            if (product.User == null)
-            {
-                return BadRequest("Es necesario especificar el usuario.");
-            }
-
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == product.User.Id);
+            string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
             {
                 return BadRequest("Usuario no existe.");

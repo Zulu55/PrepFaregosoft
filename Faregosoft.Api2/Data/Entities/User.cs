@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Faregosoft.Api2.Enums;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Faregosoft.Api2.Data.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
@@ -17,18 +17,7 @@ namespace Faregosoft.Api2.Data.Entities
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        [MinLength(4)]
-        public string Password { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public bool IsBlock { get; set; }
+        public UserType UserType { get; set; }
 
         [JsonIgnore]
         public ICollection<Product> Products { get; set; }

@@ -1,15 +1,14 @@
 ﻿using Faregosoft.Api2.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Faregosoft.Api2.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
@@ -18,8 +17,6 @@ namespace Faregosoft.Api2.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Customer>().HasIndex(c => c.Email).IsUnique();
             modelBuilder.Entity<Product>().HasIndex(p => p.Name).IsUnique();
         }

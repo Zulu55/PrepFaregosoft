@@ -1,4 +1,6 @@
 ﻿using Faregosoft.Api2.Data.Entities;
+using Faregosoft.Api2.Enums;
+using Faregosoft.Api2.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -9,27 +11,49 @@ namespace Faregosoft.Api2.Data
     public class SeedDb
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public SeedDb(DataContext context)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             _context = context;
+            _userHelper = userHelper;
         }
 
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
-            await SeedUsersAync();
+            await CheckRolesAsync();
+            await CheckUserAsync("Juan", "Zuluaga", "juan@yopmail.com", "322 311 4620", UserType.Admin);
             await SeedProductsAync();
             await SeedCustomersAync();
         }
 
-        private async Task SeedUsersAync()
+        private async Task CheckRolesAsync()
         {
-            if (!_context.Users.Any())
+            await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
+            await _userHelper.CheckRoleAsync(UserType.User.ToString());
+        }
+
+        private async Task<User> CheckUserAsync(string firstName, string lastName,string email, string phone, UserType userType)
+        {
+            User user = await _userHelper.GetUserAsync(email);
+            if (user == null)
             {
-                _context.Users.Add(new User { FirstName = "Juan", LastName = "Reyes", Email = "juan@yopmail.com", Password = "123456", IsActive = true });
-                await _context.SaveChangesAsync();
+                user = new User
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    UserName = email,
+                    PhoneNumber = phone,
+                    UserType = userType
+                };
+
+                await _userHelper.AddUserAsync(user, "123456");
+                await _userHelper.AddUserToRoleAsync(user, userType.ToString());
             }
+
+            return user;
         }
 
         private async Task SeedProductsAync()
@@ -51,9 +75,11 @@ namespace Faregosoft.Api2.Data
             if (!_context.Customers.Any())
             {
                 User user = await _context.Users.FirstOrDefaultAsync();
-                _context.Customers.Add(new Customer { User = user, FirstName = "Juan", LastName = "Reyes", Email = "juan@yopmail.com", Phonenumber = "303030", Address = "Calle Luna Calle Sol", IsActive = true });
-                _context.Customers.Add(new Customer { User = user, FirstName = "Fausto", LastName = "Reyes", Email = "fausto@yopmail.com", Phonenumber = "404040", Address = "Calle Luna Calle Sol", IsActive = true });
-                _context.Customers.Add(new Customer { User = user, FirstName = "Juan", LastName = "Zuluaga", Email = "zulu@yopmail.com", Phonenumber = "505050", Address = "Calle Luna Calle Sol", IsActive = true });
+                for (int i = 0; i < 100; i++)
+                {
+                    _context.Customers.Add(new Customer { User = user, FirstName = $"Nombres {i}", LastName = $"Apellidos  {i}", Email = $"cliente{i}@yopmail.com", Phonenumber = $" {i}{i}{i}{i}{i}{i}{i}", Address = $"Dirección {i}", IsActive = true });
+                }
+
                 await _context.SaveChangesAsync();
             }
         }
