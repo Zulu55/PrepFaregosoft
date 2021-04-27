@@ -34,7 +34,7 @@ namespace Faregosoft.Pages
 
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.LoginAsync(Settings.GetApiUrl(), "api", "Users", EmailTextBox.Text, PasswordPasswordBox.Password);
+            Response response = await ApiService.LoginAsync(Settings.GetApiUrl(), "api", "Account", EmailTextBox.Text, PasswordPasswordBox.Password);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -44,8 +44,8 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            User user = (User)response.Result;
-            Frame.Navigate(typeof(MainPage), user);
+            TokenResponse token = (TokenResponse)response.Result;
+            Frame.Navigate(typeof(MainPage), token);
         }
 
         private async Task<bool> ValidateFormAsync()

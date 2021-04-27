@@ -17,7 +17,7 @@ namespace Faregosoft.Pages
             _instance = this;
         }
 
-        public User User { get; set; }
+        public TokenResponse Token { get; set; }
 
         public static MainPage GetInstance()
         {
@@ -27,8 +27,8 @@ namespace Faregosoft.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            User = (User)e.Parameter;
-            WelcomeTextBlock.Text = $"Bienvenido: {User.FirstName} {User.LastName}!";
+            Token = (TokenResponse)e.Parameter;
+            WelcomeTextBlock.Text = $"Bienvenido: {Token.User.FirstName} {Token.User.LastName}!";
             MyFrame.Navigate(typeof(CustomersPage));
         }
 

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,18 +11,18 @@ namespace Faregosoft.Helpers
 {
     public class ApiService
     {
-        public static async Task<Response> LoginAsync(string urlBase, string servicePrefix, string controller, string email, string password)
+        public static async Task<Response> LoginAsync(string urlBase, string servicePrefix, string controller, string username, string password)
         {
             try
             {
                 string request = JsonConvert.SerializeObject(new LoginRequest
                 {
-                    Email = email,
+                    Username = username,
                     Password = password
                 });
 
                 StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
-                string url = $"{servicePrefix}/{controller}/Login";
+                string url = $"{servicePrefix}/{controller}/CreateToken";
 
                 HttpClientHandler handler = new HttpClientHandler()
                 {
@@ -45,12 +46,12 @@ namespace Faregosoft.Helpers
                     };
                 }
 
-                User user = JsonConvert.DeserializeObject<User>(result);
+                TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(result);
 
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = user
+                    Result = token
                 };
             }
             catch (Exception ex)
@@ -151,6 +152,51 @@ namespace Faregosoft.Helpers
             }
         }
 
+        public static async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string token)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                string url = $"{servicePrefix}/{controller}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = list
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
         public static async Task<Response> PostAsync<T>(string urlBase, string servicePrefix, string controller, T model)
         {
             try
@@ -168,6 +214,55 @@ namespace Faregosoft.Helpers
                     BaseAddress = new Uri(urlBase)
                 };
 
+                string url = $"{servicePrefix}/{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                T item = JsonConvert.DeserializeObject<T>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = item
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public static async Task<Response> PostAsync<T>(string urlBase, string servicePrefix, string controller, T model, string token)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
                 string url = $"{servicePrefix}/{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string result = await response.Content.ReadAsStringAsync();
@@ -246,6 +341,55 @@ namespace Faregosoft.Helpers
                 };
             }
         }
+        
+        public static async Task<Response> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, int id, string token)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                string url = $"{servicePrefix}/{controller}/{id}";
+                HttpResponseMessage response = await client.PutAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                T item = JsonConvert.DeserializeObject<T>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = item
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
 
         public static async Task<Response> DeleteAsync<T>(string urlBase, string servicePrefix, string controller, int id)
         {
@@ -261,6 +405,49 @@ namespace Faregosoft.Helpers
                     BaseAddress = new Uri(urlBase)
                 };
 
+                string url = $"{servicePrefix}/{controller}/{id}";
+                HttpResponseMessage response = await client.DeleteAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                return new Response
+                {
+                    IsSuccess = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public static async Task<Response> DeleteAsync<T>(string urlBase, string servicePrefix, string controller, int id, string token)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
                 string url = $"{servicePrefix}/{controller}/{id}";
                 HttpResponseMessage response = await client.DeleteAsync(url);
                 string result = await response.Content.ReadAsStringAsync();

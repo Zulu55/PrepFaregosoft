@@ -27,7 +27,7 @@ namespace Faregosoft.Pages
         {
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.GetListAsync<Product>(Settings.GetApiUrl(), "api", "Products");
+            Response response = await ApiService.GetListAsync<Product>(Settings.GetApiUrl(), "api", "Products", MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -59,10 +59,10 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            product.User = MainPage.GetInstance().User;
+            product.User = MainPage.GetInstance().Token.User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "Products", product);
+            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "Products", product, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -90,10 +90,9 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            product.User = MainPage.GetInstance().User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PutAsync(Settings.GetApiUrl(), "api", "Products", product, product.Id);
+            Response response = await ApiService.PutAsync(Settings.GetApiUrl(), "api", "Products", product, product.Id, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -120,7 +119,7 @@ namespace Faregosoft.Pages
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
             Product product = Products[ProductsListView.SelectedIndex];
-            Response response = await ApiService.DeleteAsync<Product>(Settings.GetApiUrl(), "api", "Products", product.Id);
+            Response response = await ApiService.DeleteAsync<Product>(Settings.GetApiUrl(), "api", "Products", product.Id, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)

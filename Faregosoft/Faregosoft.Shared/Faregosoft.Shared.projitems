@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dialogs\ProductDialog.xaml.cs">
       <DependentUpon>ProductDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\UserType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ApiService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RegexUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
@@ -35,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RegisterUserModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TokenResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>

@@ -28,7 +28,7 @@ namespace Faregosoft.Pages
         {
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.GetListAsync<Customer>(Settings.GetApiUrl(), "api", "Customers");
+            Response response = await ApiService.GetListAsync<Customer>(Settings.GetApiUrl(), "api", "Customers", MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -60,10 +60,9 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            customer.User = MainPage.GetInstance().User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "Customers", customer);
+            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "Customers", customer, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -91,10 +90,9 @@ namespace Faregosoft.Pages
                 return;
             }
 
-            customer.User = MainPage.GetInstance().User;
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
-            Response response = await ApiService.PutAsync(Settings.GetApiUrl(), "api", "Customers", customer, customer.Id);
+            Response response = await ApiService.PutAsync(Settings.GetApiUrl(), "api", "Customers", customer, customer.Id, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
@@ -121,7 +119,7 @@ namespace Faregosoft.Pages
             Loader loader = new Loader("Por favor espere...");
             loader.Show();
             Customer customer = Customers[CustomersListView.SelectedIndex];
-            Response response = await ApiService.DeleteAsync<Customer>(Settings.GetApiUrl(), "api", "Customers", customer.Id);
+            Response response = await ApiService.DeleteAsync<Customer>(Settings.GetApiUrl(), "api", "Customers", customer.Id, MainPage.GetInstance().Token.Token);
             loader.Close();
 
             if (!response.IsSuccess)
