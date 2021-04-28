@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Faregosoft.Api2.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Faregosoft.Api2.Models
 {
@@ -16,6 +17,13 @@ namespace Faregosoft.Api2.Models
         [MaxLength(100)]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [MaxLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public UserType UserType { get; set; }
 
         [Required]
         [MaxLength(20)]

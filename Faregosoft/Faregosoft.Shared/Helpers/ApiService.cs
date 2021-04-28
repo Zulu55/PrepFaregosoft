@@ -475,5 +475,116 @@ namespace Faregosoft.Helpers
                 };
             }
         }
+
+        public static async Task<Response> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, EmailRequest emailRequest)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(emailRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        public static async Task<Response> ModifyUserAsync(string urlBase, string servicePrefix, string controller, RegisterUserModel model, string token)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PutAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<Response>(answer);
+                }
+
+                User user = JsonConvert.DeserializeObject<User>(answer);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = user
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public static async Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string token)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(changePasswordRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
     }
 }
