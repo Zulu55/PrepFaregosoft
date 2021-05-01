@@ -1,6 +1,13 @@
-﻿using Faregosoft.Models;
+﻿using Faregosoft.Components;
+using Faregosoft.Helpers;
+using Faregosoft.Models;
+using Faregosoft.Pages;
 using System;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.Media.Capture;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,6 +30,10 @@ namespace Faregosoft.Dialogs
             else
             {
                 TitleTextBlock.Text = "Nuevo producto";
+                DialogGrid.Height = 300;
+                ImagesGridView.Visibility = Visibility.Collapsed;
+                TakePictureButton.Visibility = Visibility.Collapsed;
+                SelectPictureButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -87,6 +98,101 @@ namespace Faregosoft.Dialogs
         private void CloseImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Hide();
+        }
+
+        private async void TakePictureButton_Click(object sender, RoutedEventArgs e)
+        {
+            CameraCaptureUI captureUI = new CameraCaptureUI();
+            captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+            captureUI.PhotoSettings.CroppedSizeInPixels = new Size(200, 200);
+
+            StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+            if (photo == null)
+            {
+                return;
+            }
+
+            StorageFolder destinationFolder =
+                await ApplicationData.Current.LocalFolder.CreateFolderAsync("Products",
+                    CreationCollisionOption.OpenIfExists);
+
+            string fileName = $"{Guid.NewGuid()}.jpg";
+            await photo.CopyAsync(destinationFolder, fileName, NameCollisionOption.ReplaceExisting);
+            IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
+            AddProductImageRequest model = await UploadImageAsync(stream);
+            if (model != null)
+            {
+                Product.ProductImages.Add(new ProductImage
+                {
+                    Image = model.Guid
+                });
+
+                RefreshList();
+            }
+        }
+
+        private void RefreshList()
+        {
+            ImagesGridView.ItemsSource = null;
+            ImagesGridView.Items.Clear();
+            ImagesGridView.ItemsSource = Product.ProductImages;
+        }
+
+        private async Task<AddProductImageRequest> UploadImageAsync(IRandomAccessStream stream)
+        {
+            Loader loader = new Loader("Por favor espere...");
+            loader.Show();
+
+            byte[] bytes = await ConverterHelper.ToByteArray(stream);
+            AddProductImageRequest model = new AddProductImageRequest
+            {
+                ProductId = Product.Id,
+                Image = bytes
+            };
+
+            Response response = await ApiService.PostAsync(Settings.GetApiUrl(), "api", "ProductImages", model, MainPage.GetInstance().Token.Token);
+            loader.Close();
+
+            if (!response.IsSuccess)
+            {
+                MessageDialog dialog = new MessageDialog(response.Message, "Error");
+                await dialog.ShowAsync();
+                return null; 
+            }
+
+            model = (AddProductImageRequest)response.Result;
+            return model;
+        }
+
+        private async void SelectPictureButton_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Storage.Pickers.FileOpenPicker picker = new Windows.Storage.Pickers.FileOpenPicker
+            {
+                ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
+                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary
+            };
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file == null)
+            {
+                return;
+            }
+
+            IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read);
+            AddProductImageRequest model = await UploadImageAsync(stream);
+            if (model != null)
+            {
+                Product.ProductImages.Add(new ProductImage
+                {
+                    Image = model.Guid
+                });
+
+                RefreshList();
+            }
         }
     }
 }

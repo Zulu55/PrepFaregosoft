@@ -29,8 +29,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Enums\UserType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ApiService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConverterHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RegexUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AddProductImageRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChangePasswordRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Customer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\EmailRequest.cs" />
@@ -101,7 +103,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\customer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\delete.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\edit.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon-camera.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon-select-image.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon-x.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon-x2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ic_exit_to_app.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\product.png" />
   </ItemGroup>

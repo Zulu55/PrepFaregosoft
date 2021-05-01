@@ -65,7 +65,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image      Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="{x:Bind ImageFullPath}"/>
+                            <Image      Grid.Column="0" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" Source="{x:Bind ImageFullPath}"/>
                             <TextBlock  Grid.Column="1" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Name}"/>
                             <TextBlock  Grid.Column="2" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Description}"/>
                             <TextBlock  Grid.Column="3" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind PriceFormated}"/>
