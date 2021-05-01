@@ -25,6 +25,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -32,12 +33,13 @@
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" FontWeight="Bold" Text="Nombre"/>
-                <TextBlock Grid.Column="1" FontWeight="Bold" Text="Descripción"/>
-                <TextBlock Grid.Column="2" FontWeight="Bold" Text="Precio"/>
-                <TextBlock Grid.Column="3" FontWeight="Bold" Text="Inventario"/>
-                <TextBlock Grid.Column="4" FontWeight="Bold" Text="Está Activo"/>
-                <TextBlock Grid.Column="5" FontWeight="Bold" Text="Acción"/>
+                <TextBlock Grid.Column="0" FontWeight="Bold" Text="Imagén"/>
+                <TextBlock Grid.Column="1" FontWeight="Bold" Text="Nombre"/>
+                <TextBlock Grid.Column="2" FontWeight="Bold" Text="Descripción"/>
+                <TextBlock Grid.Column="3" FontWeight="Bold" Text="Precio"/>
+                <TextBlock Grid.Column="4" FontWeight="Bold" Text="Inventario"/>
+                <TextBlock Grid.Column="5" FontWeight="Bold" Text="Está Activo"/>
+                <TextBlock Grid.Column="6" FontWeight="Bold" Text="Acción"/>
             </Grid>
             <Border Background="Black" Height="2" Margin="0,5"/>
         </StackPanel>
@@ -52,6 +54,7 @@
                     <DataTemplate x:DataType="model:Product">
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -62,12 +65,13 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock  Grid.Column="0" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Name}"/>
-                            <TextBlock  Grid.Column="1" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Description}"/>
-                            <TextBlock  Grid.Column="2" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind PriceFormated}"/>
-                            <TextBlock  Grid.Column="3" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind InventoryFormated}"/>
-                            <CheckBox   Grid.Column="4" VerticalAlignment="Center" FontSize="14" IsEnabled="False"   HorizontalAlignment="Right"     IsChecked="{x:Bind IsActive}"/>
-                            <StackPanel Grid.Column="5" Orientation="Horizontal">
+                            <Image      Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="{x:Bind ImageFullPath}"/>
+                            <TextBlock  Grid.Column="1" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Name}"/>
+                            <TextBlock  Grid.Column="2" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="{x:Bind Description}"/>
+                            <TextBlock  Grid.Column="3" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind PriceFormated}"/>
+                            <TextBlock  Grid.Column="4" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" HorizontalTextAlignment="Right" Text="{x:Bind InventoryFormated}"/>
+                            <CheckBox   Grid.Column="5" VerticalAlignment="Center" FontSize="14" IsEnabled="False"   HorizontalAlignment="Right"     IsChecked="{x:Bind IsActive}"/>
+                            <StackPanel Grid.Column="6" Orientation="Horizontal">
                                 <Image Source="/Assets/edit.png"   Margin="5,0" Height="25" VerticalAlignment="Center" Tapped="EditImage_Tapped"/>
                                 <Image Source="/Assets/delete.png" Margin="5,0" Height="25" VerticalAlignment="Center" Tapped="DeleteImage_Tapped"/>
                             </StackPanel>

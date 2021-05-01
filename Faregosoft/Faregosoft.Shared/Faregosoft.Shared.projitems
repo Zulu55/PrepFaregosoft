@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\EmailRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ProductImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RegisterUserModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Response.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TokenResponse.cs" />

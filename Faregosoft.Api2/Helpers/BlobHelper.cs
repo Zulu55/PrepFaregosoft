@@ -19,6 +19,13 @@ namespace Faregosoft.Api2.Helpers
             _blobClient = storageAccount.CreateCloudBlobClient();
         }
 
+        public async Task DeleteBlobAsync(Guid image, string containerName)
+        {
+            CloudBlobContainer container = _blobClient.GetContainerReference(containerName);
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference($"{image}");
+            await blockBlob.DeleteAsync();
+        }
+
         public async Task<Guid> UploadBlobAsync(byte[] file, string containerName)
         {
             MemoryStream stream = new MemoryStream(file);
