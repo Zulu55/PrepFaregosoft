@@ -10,7 +10,7 @@ namespace Faregosoft.Api2.Data.Entities
         public Guid Image { get; set; }
 
         public string ImageFullPath => Image == Guid.Empty
-            ? $"https://faregosoftapi.azurewebsites.net/images/noimage.png"
-            : $"https://faregosoft.blob.core.windows.net/products/{Image}";
+            ? $"https://faregosoftapiprep.azurewebsites.net/images/noimage.png"
+            : $"https://faregosoftprep.blob.core.windows.net/products/{Image}";
     }
 }

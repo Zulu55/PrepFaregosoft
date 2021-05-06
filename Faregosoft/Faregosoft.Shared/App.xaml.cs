@@ -63,7 +63,7 @@ namespace Faregosoft
         private void SaveParameters()
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values["ApiUrl"] = "https://faregosoftapi.azurewebsites.net/";
+            localSettings.Values["ApiUrl"] = "https://faregosoftapiprep.azurewebsites.net/"; // "https://faregosoftapiprep.azurewebsites.net/";
         }
 
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)

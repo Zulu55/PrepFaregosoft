@@ -28,7 +28,7 @@ namespace Faregosoft.Api2.Data.Entities
 
         [Display(Name = "Image")]
         public string ImageFullPath => ProductImages == null || ProductImages.Count == 0
-            ? $"https://faregosoftapi.azurewebsites.net/images/noimage.png"
+            ? $"https://faregosoftapiprep.azurewebsites.net/images/noimage.png"
             : ProductImages.FirstOrDefault().ImageFullPath;
 
         public ICollection<ProductImage> ProductImages { get; set; }
