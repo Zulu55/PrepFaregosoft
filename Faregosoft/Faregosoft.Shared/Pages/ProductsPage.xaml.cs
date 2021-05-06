@@ -15,6 +15,10 @@ namespace Faregosoft.Pages
 {
     public sealed partial class ProductsPage : Page
     {
+        private int _totalRecords;
+        private Pagination _pagination;
+        private Loader _loader;
+
         public ProductsPage()
         {
             InitializeComponent();
@@ -25,21 +29,48 @@ namespace Faregosoft.Pages
 
         private async Task LoadProductsAsync()
         {
-            Loader loader = new Loader("Por favor espere...");
-            loader.Show();
-            Response response = await ApiService.GetListAsync<Product>(Settings.GetApiUrl(), "api", "Products", MainPage.GetInstance().Token.Token);
-            loader.Close();
-
-            if (!response.IsSuccess)
+            _loader = new Loader("Por favor espere...");
+            _loader.Show();
+            Response responseCount = await ApiService.GetCountAsync(Settings.GetApiUrl(), "api", "Products", MainPage.GetInstance().Token.Token);
+            _loader.Close();
+            if (!responseCount.IsSuccess)
             {
-                MessageDialog dialog = new MessageDialog(response.Message, "Error");
+                MessageDialog dialog = new MessageDialog(responseCount.Message, "Error");
                 await dialog.ShowAsync();
                 return;
             }
 
-            List<Product> products = (List<Product>)response.Result;
+            _totalRecords = (int)responseCount.Result;
+            _pagination = new Pagination(_totalRecords);
+            _pagination.PageChanged += Pagination_PageChanged;
+            MyPagination.Children.Clear();
+            MyPagination.Children.Add(_pagination);
+
+            await GetProductsAsync();
+        }
+
+        private async Task GetProductsAsync()
+        {
+            _loader.Show();
+            Response responseList = await ApiService.GetListPagedAsync<Product>(Settings.GetApiUrl(), "api", "Products", _pagination.Page - 1, _pagination.Size, MainPage.GetInstance().Token.Token);
+            _loader.Close();
+
+            if (!responseList.IsSuccess)
+            {
+                MessageDialog dialog = new MessageDialog(responseList.Message, "Error");
+                await dialog.ShowAsync();
+                return;
+            }
+
+            List<Product> products = (List<Product>)responseList.Result;
             Products = new ObservableCollection<Product>(products);
             RefreshList();
+        }
+
+        private async void Pagination_PageChanged(object sender, EventArgs e)
+        {
+            _loader.Show();
+            await GetProductsAsync();
         }
 
         private void RefreshList()

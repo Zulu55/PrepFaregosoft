@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -80,5 +81,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
+        <StackPanel Grid.Row="2" x:Name="MyPagination"/>
     </Grid>
 </Page>
